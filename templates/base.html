@@ -1,0 +1,39 @@
+<!doctype html>
+{% load bootstrap4%}  {% bootstrap_css%}  {% bootstrap_javascript jquery='slim'%}
+{% load static %}
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+    <title>{% block title %}ダミー{% endblock %}</title>
+</head>
+<body>
+<div class="container-fluid my-2">
+    <div class="container">
+        <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">
+            <a href="#" class="navbar-brand"><h3>タイトル未定</h3></a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse"
+                    data-target="#navmenu1"
+                    aria-controls="navmenu1"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navmenu1">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" href="#">今日の予定</a>
+                    <a class="nav-item nav-link" href="#">会社一覧</a>
+                    <a class="nav-item nav-link" href="#">お知らせ</a>
+                    <a class="nav-item nav-link" href="#">みんなのメモ</a>
+                    <a class="nav-item nav-link" href="#">在庫管理</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+{% block content %}<p>ダミー</p>{% endblock %}
+</body>
+</html>

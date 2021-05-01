@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% block title %}{{ today|date:"n月j日" }}の予定 - タイトル未定{% endblock %}
+{% block content %}
+<div class="container-fluid" style="background-color:#e6f2ff;">
+    <div class="container py-2">
+        <div class="row">
+            <div class="col-sm">
+                <h5>{{ today|date:"n月j日" }}の予定</h5>
+                <table class="table table-sm border rounded bg-white text-center">
+                    <tr>
+                        <th>会社名</th>
+                        <th>場所</th>
+                        <th>内容</th>
+                        <th>人数</th>
+                    </tr>
+                    {% for schedule in schedules %}
+                    <tr>
+                        <td>{{ schedule.company }}</td>
+                        <td>{{ schedule.area }}</td>
+                        <td>{{ schedule.content }}</td>
+                        <td>{{ schedule.num_of_people }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="background-color:#f1f5f9;">
+    <div class="container py-2">
+        <div class="row">
+            <div class="col-sm">
+                <h5>天気</h5>
+                <table class="table table-sm border rounded bg-white text-center">
+                    <tr>
+                        <th>日</th>
+                        <th>天候</th>
+                        <th>降水確率</th>
+                    </tr>
+                    {% for weather in weathers%}
+                    <tr>
+                        <td>{{ weather.date|date:"n/j" }}</td>
+                        <td>{{ weather.weather }}</td>
+                        <td>{{ weather.percent }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-sm mb-3">
+                <h5>お知らせ</h5>
+                <ul class="list-group">
+                    {% for info in infos %}
+                    <li class="list-group-item">
+                        <div class="m-n2">{{ info.content }}
+                            <div class="small">{{ info.name }}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-sm mb-3">
+                <h5>みんなのメモ</h5>
+                <ul class="list-group">
+                    {% for note in notes %}
+                    <li class="list-group-item">
+                        <div class="m-n2">{{ note.content }}
+                            <div class="small">{{ note.name }}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm col-md-8">
+                <h5>在庫管理</h5>
+                <table class="table table-sm border rounded bg-white text-center">
+                    <tr>
+                        <th>日付</th>
+                        <th>会社名</th>
+                        <th>商品名</th>
+                        <th>増減</th>
+                    </tr>
+                    {% for stockcontrol in stockcontrols %}
+                    <tr>
+                        <td>{{ stockcontrol.date|date:"n/j" }}</td>
+                        <td>{{ stockcontrol.company }}</td>
+                        <td>{{ stockcontrol.product }}</td>
+                        <td>{{ stockcontrol.count }}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+            <div class="col-sm col-md-4 mb-3">
+                <h5>緊急連絡先</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <div class="m-n2"><div class="small">佐藤太郎</div>0xx-xxxx-xxxx</div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="m-n2"><div class="small">肉野菜魚</div>0xx-xxxx-xxxx</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
