@@ -7,13 +7,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+    {% block extrahead %}{% endblock %}
     <title>{% block title %}ダミー{% endblock %}</title>
 </head>
 <body>
 <div class="container-fluid my-2">
     <div class="container">
         <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">
-            <a href="#" class="navbar-brand"><h3>タイトル未定</h3></a>
+            <a href="/" class="navbar-brand"><h3>自作SFA</h3></a>
             <button class="navbar-toggler" type="button"
                     data-toggle="collapse"
                     data-target="#navmenu1"

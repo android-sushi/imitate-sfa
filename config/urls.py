@@ -20,5 +20,7 @@ from schedule import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('schedule_detail/', views.schedule_detail, name='schedule_detail'),
+    path('schedule_submit/', views.schedule_submit, name='schedule_submit'),
 ]

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'schedule.apps.ScheduleConfig',
     'bootstrap4',
+    'bootstrap_datepicker_plus',
 ]
 
 MIDDLEWARE = [
@@ -127,3 +128,10 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#####################
+# django-bootstrap4 #
+#####################
+BOOTSTRAP4 = {
+    'set_placeholder': False,
+}

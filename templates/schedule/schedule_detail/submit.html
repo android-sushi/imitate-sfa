@@ -1,0 +1,21 @@
+{% extends "base.html" %}  {% load bootstrap4 %}  {% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block extrahead %}{{ form.media }}{% endblock %}
+{% block title %}予定の{{ purpose }} - 自作SFAアプリ{% endblock %}
+{% block content %}
+<div class="container-fluid" style="background-color:#f1f5f9;">
+    <div class="container py-2">
+        <h5>予定の{{ purpose }}</h5>
+        <form action="{% url 'schedule_submit' %}" method="post" novalidate>
+            <ul>
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button class="btn btn-outline-primary" type="submit">送信</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

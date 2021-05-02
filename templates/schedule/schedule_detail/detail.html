@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}{{ day|date:"n月j日" }}の予定一覧 - 自作SFAアプリ{% endblock %}
+{% block content %}
+<div class="container-fluid" style="background-color:#f1f5f9;">
+    <div class="container py-2">
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+        <div class="row">
+            <h5>{{ day|date:"n月j日" }}の予定</h5>
+            <table class="table table-sm border rounded bg-white text-center">
+                <tr>
+                    <th>会社名</th>
+                    <th>場所</th>
+                    <th>内容</th>
+                    <th>人数</th>
+                </tr>
+                {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.company }}</td>
+                    <td>{{ schedule.area }}</td>
+                    <td>{{ schedule.content }}</td>
+                    <td>{{ schedule.num_of_people }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            <div class="mt-n2">
+                <a class="btn btn-outline-dark btn-sm" href="#" role="button">編集</a>
+                <a class="btn btn-outline-danger btn-sm" href="{% url 'schedule_submit' %}" role="button">新規登録</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
