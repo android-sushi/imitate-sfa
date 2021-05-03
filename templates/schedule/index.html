@@ -1,9 +1,9 @@
 {% extends "base.html" %}
-{% block title %}{{ today|date:"n月j日" }}の予定 - 自作SFAアプリ{% endblock %}
+{% block title %}トップページ - 自作SFA{% endblock %}
 {% block content %}
 <div class="container-fluid" style="background-color:#e6f2ff;">
     <div class="container py-2">
-        <h5>{{ today|date:"n月j日" }}の予定</h5>
+        <h5><i class="far fa-calendar-alt fa-fw"></i>{{ today|date:"n月j日" }}の作業</h5>
         <table class="table table-sm border rounded bg-white text-center">
             <tr>
                 <th>会社名</th>
@@ -21,7 +21,7 @@
             {% endfor %}
         </table>
         <div class="mt-n2">
-            <a class="btn btn-outline-dark btn-sm" href="{% url 'schedule_detail' %}" role="button">もっと見る</a>
+            <a class="btn btn-outline-dark btn-sm" href="{% url 'schedule_list' %}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
         </div>
     </div>
 </div>
@@ -29,7 +29,7 @@
     <div class="container py-2">
         <div class="row">
             <div class="col-sm mb-2">
-                <h5>天気</h5>
+                <h5><i class="far fa-sun fa-fw"></i>天気</h5>
                 <table class="table table-sm border rounded bg-white text-center">
                     <tr>
                         <th>日</th>
@@ -45,11 +45,11 @@
                     {% endfor %}
                 </table>
                 <div class="mt-n2">
-                    <a class="btn btn-outline-dark btn-sm" href="#" role="button">もっと見る</a>
+                    <a class="btn btn-outline-dark btn-sm" href="#" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
                 </div>
             </div>
             <div class="col-sm mb-3">
-                <h5>お知らせ</h5>
+                <h5><i class="fas fa-info-circle fa-fw"></i>お知らせ</h5>
                 <ul class="list-group">
                     {% for info in infos %}
                     <li class="list-group-item">
@@ -60,30 +60,29 @@
                     {% endfor %}
                 </ul>
                 <div class="mt-2">
-                    <a class="btn btn-outline-dark btn-sm" href="#" role="button">もっと見る</a>
-                    <a class="btn btn-outline-danger btn-sm" href="#" role="button">登録</a>
+                    <a class="btn btn-outline-dark btn-sm" href="{% url 'info_list' %}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
                 </div>
             </div>
             <div class="col-sm mb-3">
-                <h5>みんなのメモ</h5>
+                <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモ</h5>
                 <ul class="list-group">
                     {% for note in notes %}
                     <li class="list-group-item">
-                        <div class="m-n2">{{ note.content }}
+                        <div class="m-n2">
+                            {{ note.content }}
                             <div class="small">{{ note.name }}</div>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
                 <div class="mt-2">
-                    <a class="btn btn-outline-dark btn-sm" href="#" role="button">もっと見る</a>
-                    <a class="btn btn-outline-danger btn-sm" href="#" role="button">登録</a>
+                    <a class="btn btn-outline-dark btn-sm" href="#" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-sm col-md-8 mb-2">
-                <h5>在庫管理</h5>
+                <h5><i class="fas fa-box fa-fw"></i>在庫管理</h5>
                 <table class="table table-sm border rounded bg-white text-center">
                     <tr>
                         <th>日付</th>
@@ -101,12 +100,11 @@
                     {% endfor %}
                 </table>
                 <div class="mt-n2">
-                    <a class="btn btn-outline-dark btn-sm" href="#" role="button">もっと見る</a>
-                    <a class="btn btn-outline-danger btn-sm" href="#" role="button">登録</a>
+                    <a class="btn btn-outline-dark btn-sm" href="#" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
                 </div>
             </div>
             <div class="col-sm col-md-4 mb-3">
-                <h5>緊急連絡先</h5>
+                <h5><i class="fas fa-exclamation-triangle fa-fw"></i>緊急連絡先</h5>
                 <ul class="list-group">
                     <li class="list-group-item">
                         <div class="m-n2"><div class="small">佐藤太郎</div>0xx-xxxx-xxxx</div>

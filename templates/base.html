@@ -7,33 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{% static 'css/schedule.css' %}">
+    <script src="https://kit.fontawesome.com/22f0cfa09f.js" crossorigin="anonymous"></script>
     {% block extrahead %}{% endblock %}
     <title>{% block title %}ダミー{% endblock %}</title>
 </head>
 <body>
-<div class="container-fluid my-2">
-    <div class="container">
-        <nav class="navbar navbar-expand-sm navbar-light bg-white mb-2">
-            <a href="/" class="navbar-brand"><h3>自作SFA</h3></a>
-            <button class="navbar-toggler" type="button"
-                    data-toggle="collapse"
-                    data-target="#navmenu1"
-                    aria-controls="navmenu1"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navmenu1">
-                <div class="navbar-nav">
-                    <a class="nav-item nav-link" href="#">今日の予定</a>
-                    <a class="nav-item nav-link" href="#">会社一覧</a>
-                    <a class="nav-item nav-link" href="#">お知らせ</a>
-                    <a class="nav-item nav-link" href="#">みんなのメモ</a>
-                    <a class="nav-item nav-link" href="#">在庫管理</a>
-                </div>
+<div class="container-fluid bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark">
+        <a href="/" class="navbar-brand"><h3><i class="fas fa-tasks fa-fw"></i></i>自作SFA</h3></a>
+        <button class="navbar-toggler" type="button"
+                data-toggle="collapse"
+                data-target="#navmenu1"
+                aria-controls="navmenu1"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navmenu1">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'schedule_list' %}"><i class="far fa-calendar-alt fa-fw"></i>今日の作業</a>
+                <a class="nav-item nav-link" href="#"><i class="far fa-sun fa-fw"></i>天気</a>
+                <a class="nav-item nav-link" href="{% url 'info_list' %}"><i class="fas fa-info-circle fa-fw"></i>お知らせ</a>
+                <a class="nav-item nav-link" href="#"><i class="far fa-comment-alt fa-fw"></i>みんなのメモ</a>
+                <a class="nav-item nav-link" href="#"><i class="fas fa-box fa-fw"></i>在庫管理</a>
+                <a class="nav-item nav-link" href="#"><i class="far fa-building fa-fw"></i>会社一覧</a>
+                <a class="nav-item nav-link" href="#"><i class="fas fa-users fa-fw"></i>メンバー</a>
             </div>
-        </nav>
-    </div>
+        </div>
+    </nav>
 </div>
 {% block content %}<p>ダミー</p>{% endblock %}
 </body>

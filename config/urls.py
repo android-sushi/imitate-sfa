@@ -20,7 +20,16 @@ from schedule import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index'),
-    path('schedule_detail/', views.schedule_detail, name='schedule_detail'),
-    path('schedule_submit/', views.schedule_submit, name='schedule_submit'),
+    # トップページ
+    path('', views.IndexView.as_view(), name='index'),
+    # 予定一覧
+    path('schedule/', views.ScheduleListView.as_view(), name='schedule_list'),
+    path('schedule/create/', views.ScheduleCreateView.as_view(), name='schedule_create'),
+    path('schedule/edit/<int:pk>/', views.ScheduleEditView.as_view(), name='schedule_edit'),
+    path('schedule/delete/<int:pk>/', views.ScheduleDeleteView.as_view(), name='schedule_delete'),
+    # お知らせ一覧
+    path('info/', views.InfoListView.as_view(), name='info_list'),
+    path('info/create/', views.InfoCreateView.as_view(), name='info_create'),
+    path('info/edit/<int:pk>/', views.InfoEditView.as_view(), name='info_edit'),
+    path('info/delete/<int:pk>/', views.InfoDeleteView.as_view(), name='info_delete'),
 ]

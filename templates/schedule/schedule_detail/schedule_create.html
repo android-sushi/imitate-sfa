@@ -1,0 +1,21 @@
+{% extends "base.html" %}  {% load bootstrap4 %}  {% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block extrahead %}{{ form.media }}{% endblock %}
+{% block title %}作業の新規登録 - 自作SFA{% endblock %}
+{% block content %}
+<div class="container-fluid" style="background-color:#e6f2ff;">
+    <div class="container py-2">
+        <h5><i class="far fa-calendar-alt fa-fw"></i>作業の新規登録</h5>
+        <form action="{% url 'schedule_create' %}" method="post" novalidate>
+            <ul>
+                {% for error in field.errors %}
+                <li>{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            <button class="btn btn-outline-primary" type="submit"><i class="fas fa-paper-plane fa-fw"></i>送信</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

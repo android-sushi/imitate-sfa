@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}{{ day|date:"n月j日" }}の作業 - 自作SFA{% endblock %}
+{% block content %}
+<div class="container-fluid" style="background-color:#e6f2ff;">
+    <div class="container py-2">
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+        <h5><i class="far fa-calendar-alt fa-fw"></i>{{ day|date:"n月j日" }}の作業</h5>
+        <table class="table table-sm border rounded bg-white text-center">
+            <tr>
+                <th>会社名</th>
+                <th>場所</th>
+                <th>内容</th>
+                <th>人数</th>
+                <th></th>
+            </tr>
+            {% for object in object_list  %}
+            <tr>
+                <td>{{ object.company }}</td>
+                <td>{{ object.area }}</td>
+                <td>{{ object.content }}</td>
+                <td>{{ object.num_of_people }}</td>
+                <td><a href="{% url 'schedule_edit' object.pk %}" class="btn btn-outline-primary btn-sm"><i class="far fa-edit fa-fw"></i>編集</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+        <div class="mt-n2">
+            <a class="btn btn-outline-dark btn-sm" href="{% url 'schedule_create'%}" role="button"><i class="far fa-plus-square fa-fw"></i>新規登録</a>
+        </div>
+    </div>
+</div>
+<div class="container-fluid" style="background-color:#f1f5f9;">
+    <div class="container py-2">
+        <h5>明日の作業</h5>
+        <h5>過去の作業</h5>
+    </div>
+</div>
+{% endblock %}
