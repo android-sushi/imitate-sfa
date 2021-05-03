@@ -53,8 +53,8 @@
                 <ul class="list-group">
                     {% for info in infos %}
                     <li class="list-group-item">
-                        <div class="m-n2">{{ info.content }}
-                            <div class="small">{{ info.name }}</div>
+                        <div class="m-n2">{{ info.content | truncatechars:25 }}
+                            <div class="small">{{ info.date|date:"n月j日" }}・{{ info.name }}</div>
                         </div>
                     </li>
                     {% endfor %}
@@ -69,14 +69,14 @@
                     {% for note in notes %}
                     <li class="list-group-item">
                         <div class="m-n2">
-                            {{ note.content }}
+                            {{ note.content | truncatechars:25 }}
                             <div class="small">{{ note.name }}</div>
                         </div>
                     </li>
                     {% endfor %}
                 </ul>
                 <div class="mt-2">
-                    <a class="btn btn-outline-dark btn-sm" href="#" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                    <a class="btn btn-outline-dark btn-sm" href="{% url 'note_list' %}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
                 </div>
             </div>
         </div>

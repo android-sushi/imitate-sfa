@@ -22,7 +22,7 @@
                     <td>{{ object.num_of_people }}</td>
                 </tr>
             </table>
-            <p>予定を削除しますか？</p>
+            <p>この予定を削除しますか？</p>
             <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt fa-fw"></i>削除</button>
             <a href="{% url 'schedule_edit' object.pk %}" class="btn btn-outline-dark"><i class="fas fa-long-arrow-alt-left fa-fw"></i></i>戻る</a>
         </form>

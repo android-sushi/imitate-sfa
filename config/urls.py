@@ -32,4 +32,9 @@ urlpatterns = [
     path('info/create/', views.InfoCreateView.as_view(), name='info_create'),
     path('info/edit/<int:pk>/', views.InfoEditView.as_view(), name='info_edit'),
     path('info/delete/<int:pk>/', views.InfoDeleteView.as_view(), name='info_delete'),
+    # メモモデル
+    path('note/', views.NoteListView.as_view(), name='note_list'),
+    path('note/create/', views.NoteCreateView.as_view(), name='note_create'),
+    path('note/edit/<int:pk>/', views.NoteEditView.as_view(), name='note_edit'),
+    path('note/delete/<int:pk>/', views.NoteDeleteView.as_view(), name='note_delete'),
 ]

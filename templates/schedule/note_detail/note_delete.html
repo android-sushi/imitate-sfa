@@ -1,20 +1,20 @@
 {% extends "base.html" %}  {% load bootstrap4 %}  {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {% block extrahead %}{{ form.media }}{% endblock %}
-{% block title %}お知らせの削除 - 自作SFA{% endblock %}
+{% block title %}みんなのメモの削除 - 自作SFA{% endblock %}
 {% block content %}
 <div class="container-fluid" style="background-color:#e6f2ff;">
     <div class="container py-2">
-        <h5><i class="fas fa-info-circle fa-fw"></i>お知らせの削除</h5>
+        <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモの削除</h5>
         <form action="" method="post">
             {% csrf_token %}
             <li class="list-group-item">
                     {{ object.content | linebreaksbr}}
                     <div class="small">{{ object.name }}</div>
             </li>
-            <p>このお知らせを削除しますか？</p>
+            <p>このみんなのメモを削除しますか？</p>
             <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt fa-fw"></i>削除</button>
-            <a href="{% url 'info_edit' object.pk %}" class="btn btn-outline-dark"><i class="fas fa-long-arrow-alt-left fa-fw"></i></i>戻る</a>
+            <a href="{% url 'note_edit' object.pk %}" class="btn btn-outline-dark"><i class="fas fa-long-arrow-alt-left fa-fw"></i></i>戻る</a>
         </form>
     </div>
 </div>

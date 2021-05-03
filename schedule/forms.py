@@ -35,7 +35,7 @@ class InfoModelForm(forms.ModelForm):
 
     class Meta:
         model = Info
-        fields = ('date', 'content', 'name')
+        fields = ('content', 'date', 'name')
         widgets = {
             'date': datetimepicker.DateTimePickerInput(
                 format='%Y-%m-%d',
@@ -45,3 +45,16 @@ class InfoModelForm(forms.ModelForm):
                 }
             )
         }
+
+
+class NoteModelForm(forms.ModelForm):
+    """メモのフォーム"""
+    name = forms.ModelChoiceField(
+        label='名前',
+        queryset=Person.objects.all(),
+        empty_label=None,
+    )
+
+    class Meta:
+        model = Note
+        fields = ('content', 'name')

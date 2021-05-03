@@ -11,7 +11,7 @@ from .models import (
     Schedule, Product, StockControl, Weather
 )
 from .forms import (
-    ScheduleModelForm, InfoModelForm,
+    ScheduleModelForm, InfoModelForm, NoteModelForm,
 )
 
 
@@ -138,7 +138,51 @@ class InfoDeleteView(DeleteView):
         return result
 
 
+class NoteListView(ListView):
+    """メモの一覧"""
+    model = Note
+    template_name = 'schedule/note_detail/note_list.html'
+    paginate_by = 10
 
 
+class NoteCreateView(CreateView):
+    """メモの新規登録"""
+    model = Note
+    form_class = NoteModelForm
+    template_name = 'schedule/note_detail/note_create.html'
+    success_url = reverse_lazy('note_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, '保存しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
 
 
+class NoteEditView(UpdateView):
+    """メモの編集"""
+    model = Note
+    form_class = NoteModelForm
+    template_name = 'schedule/note_detail/note_edit.html'
+    success_url = reverse_lazy('note_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, '保存しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
+class NoteDeleteView(DeleteView):
+    """メモの削除"""
+    model = Note
+    form_class = NoteModelForm
+    template_name = 'schedule/note_detail/note_delete.html'
+    success_url = reverse_lazy('note_list')
+
+    def delete(self, request, *args, **kwargs):
+        result = super().delete(request, *args, **kwargs)
+        messages.success(self.request, '削除しました')
+        return result
