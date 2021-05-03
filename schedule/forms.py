@@ -1,7 +1,14 @@
 from django import forms
-from .models import Company, Person, Info, Note, Schedule, Product, StockControl, Weather
+from .models import (
+    Company, Person, Info, Note, Schedule,
+    Product, StockControl, Weather
+)
+from django.utils import timezone
+from django.utils.timezone import localtime
 
-import bootstrap_datepicker_plus as datetimepicker
+
+class DateInput(forms.DateInput):
+    input_type = 'date'
 
 
 class ScheduleModelForm(forms.ModelForm):
@@ -9,20 +16,12 @@ class ScheduleModelForm(forms.ModelForm):
     company = forms.ModelChoiceField(
         label='会社名',
         queryset=Company.objects.all(),
-        empty_label=None,)
+        empty_label=None, )
 
     class Meta:
         model = Schedule
         fields = ('date', 'company', 'area', 'content', 'num_of_people')
-        widgets = {
-            'date': datetimepicker.DateTimePickerInput(
-                format='%Y-%m-%d',
-                options={
-                    'locale': 'ja',
-                    'dayViewHeaderFormat': 'YYYY年 MMMM',
-                }
-            )
-        }
+        widgets = {'date': DateInput()}
 
 
 class InfoModelForm(forms.ModelForm):
@@ -36,15 +35,7 @@ class InfoModelForm(forms.ModelForm):
     class Meta:
         model = Info
         fields = ('content', 'date', 'name')
-        widgets = {
-            'date': datetimepicker.DateTimePickerInput(
-                format='%Y-%m-%d',
-                options={
-                    'locale': 'ja',
-                    'dayViewHeaderFormat': 'YYYY年 MMMM',
-                }
-            )
-        }
+        widgets = {'date': DateInput()}
 
 
 class NoteModelForm(forms.ModelForm):
@@ -58,3 +49,26 @@ class NoteModelForm(forms.ModelForm):
     class Meta:
         model = Note
         fields = ('content', 'name')
+
+
+class StockControlModelForm(forms.ModelForm):
+    """持ち出し＆補充のフォーム"""
+    company = forms.ModelChoiceField(
+        label='会社名',
+        queryset=Company.objects.all(),
+        empty_label=None,
+    )
+    product = forms.ModelChoiceField(
+        label='商品名',
+        queryset=Product.objects.all(),
+        empty_label=None,
+    )
+    date = forms.DateField(
+        label='日付',
+        initial=localtime(timezone.now())
+    )
+
+    class Meta:
+        model = StockControl
+        fields = ('date', 'company', 'product', 'count')
+        widgets = {'date': DateInput()}

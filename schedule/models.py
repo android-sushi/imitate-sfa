@@ -1,5 +1,6 @@
 from django.utils import timezone
 from django.db import models
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class Company(models.Model):
@@ -61,9 +62,9 @@ class Schedule(models.Model):
     date = models.DateField(verbose_name='日付', default=timezone.now)
     company = models.ForeignKey(Company, verbose_name='会社名',
                                 on_delete=models.PROTECT)
-    area = models.CharField(verbose_name='場所', max_length=255)
-    content = models.TextField(verbose_name='内容')
-    num_of_people = models.IntegerField(verbose_name='人数')
+    area = models.CharField(verbose_name='場所', max_length=100)
+    content = models.CharField(verbose_name='内容', max_length=100)
+    num_of_people = models.IntegerField(verbose_name='人数', validators=[MinValueValidator(1), MaxValueValidator(1000)])
 
     def __str__(self):
         return str(self.date)

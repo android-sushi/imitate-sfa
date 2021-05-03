@@ -1,0 +1,31 @@
+{% extends "base.html" %}  {% load bootstrap4 %}  {% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block extrahead %}{{ form.media }}{% endblock %}
+{% block title %}在庫持ち出しの削除 - 自作SFA{% endblock %}
+{% block content %}
+<div class="container-fluid" style="background-color:#e6f2ff;">
+    <div class="container py-2">
+        <h5><i class="fas fa-info-circle fa-fw"></i>在庫持ち出しの削除</h5>
+        <form action="" method="post">
+            {% csrf_token %}
+            <table class="table table-sm border rounded bg-white text-center">
+                <tr>
+                    <th>日付</th>
+                    <th>会社名</th>
+                    <th>商品名</th>
+                    <th>増減</th>
+                </tr>
+                <tr>
+                    <td class="align-middle">{{ object.date|date:"n月j日" }}</td>
+                    <td class="align-middle">{{ object.company }}</td>
+                    <td class="align-middle">{{ object.product }}</td>
+                    <td class="align-middle">{{ object.count }}</td>
+                </tr>
+            </table>
+            <p>この在庫持ち出しを削除しますか？</p>
+            <button class="btn btn-outline-danger" type="submit"><i class="far fa-trash-alt fa-fw"></i>削除</button>
+            <a href="{% url 'sc_edit' object.pk %}" class="btn btn-outline-dark"><i class="fas fa-long-arrow-alt-left fa-fw"></i></i>戻る</a>
+        </form>
+    </div>
+</div>
+{% endblock %}
