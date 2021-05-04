@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-sm mb-2">
                     <h5><i class="far fa-sun fa-fw"></i>天気（仙台市{{ forecasts_info.area }}）</h5>
-                    <p>{{ forecasts_info.publishing_office }} {{ forecasts_info.report_datetime|date:"h時" }}発表</p>
+                    <p>{{ forecasts_info.publishing_office }} {{ forecasts_info.report_datetime|date:"H時" }}発表</p>
                     <table class="table table-sm border rounded bg-white text-center">
                         <tr>
                             <th>日</th>
@@ -130,10 +130,12 @@
                             </tr>
                         {% endfor %}
                     </table>
-                    <a class="btn btn-outline-dark btn-sm" href="{% url 'product_list' %}" role="button"><i
-                            class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                    <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
-                            class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
+                    <div class="mt-n2">
+                        <a class="btn btn-outline-dark btn-sm" href="{% url 'product_list' %}" role="button"><i
+                                class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                        <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
+                                class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
+                    </div>
                 </div>
             </div>
         </div>

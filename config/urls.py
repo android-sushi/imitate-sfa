@@ -31,4 +31,10 @@ urlpatterns = [
     path('product/create', views.ProductCreateView.as_view(), name='product_create'),
     path('product/edit/<int:pk>', views.ProductEditView.as_view(), name='product_edit'),
     path('product/delete/<int:pk>', views.ProductDeleteView.as_view(), name='product_delete'),
+    # 人名一覧
+    path('person', views.PersonListView.as_view(), name='person_list'),
+    path('person/create', views.PersonCreateView.as_view(), name='person_create'),
+    path('person/edit/<int:pk>', views.PersonEditView.as_view(), name='person_edit'),
+    path('person/delete/<int:pk>', views.PersonDeleteView.as_view(), name='person_delete'),
+
 ]

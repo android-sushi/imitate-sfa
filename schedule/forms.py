@@ -54,12 +54,6 @@ class NoteModelForm(forms.ModelForm):
 
 class ProductModelForm(forms.ModelForm):
     """在庫のフォーム"""
-    name = forms.ModelChoiceField(
-        label='商品名',
-        queryset = Product.objects.all(),
-        empty_label=None,
-    )
-
     class Meta:
         model = Product
         fields = ('name', 'stock')
@@ -86,3 +80,21 @@ class StockControlModelForm(forms.ModelForm):
         model = StockControl
         fields = ('date', 'company', 'product', 'count')
         widgets = {'date': DateInput()}
+
+
+class PersonModelForm(forms.ModelForm):
+    """人名のフォーム"""
+    company = forms.ModelChoiceField(
+        label='会社名',
+        queryset=Company.objects.all(),
+        empty_label=None,
+    )
+
+    class Meta:
+        model = Person
+        fields = ('name', 'company')
+
+
+
+
+

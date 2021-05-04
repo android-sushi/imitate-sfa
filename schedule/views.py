@@ -1,3 +1,4 @@
+from django.db import IntegrityError
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import TemplateView, ListView, CreateView, UpdateView, DeleteView
@@ -12,7 +13,7 @@ from .models import (
     Schedule, Product, StockControl, Weather
 )
 from .forms import (
-    ScheduleModelForm, InfoModelForm, NoteModelForm,
+    PersonModelForm, ScheduleModelForm, InfoModelForm, NoteModelForm,
     StockControlModelForm, ProductModelForm,
 )
 
@@ -301,6 +302,61 @@ class ProductDeleteView(DeleteView):
     form_class = ProductModelForm
     template_name = 'schedule/product_detail/product_delete.html'
     success_url = reverse_lazy('product_list')
+
+    def delete(self, request, *args, **kwargs):
+        result = super().delete(request, *args, **kwargs)
+        messages.success(self.request, '削除しました')
+        return result
+
+
+# ここから
+
+class PersonListView(ListView):
+    """人名の一覧"""
+    model = Person
+    template_name = 'schedule/person_detail/person_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return self.model.objects.order_by('name')
+
+
+class PersonCreateView(CreateView):
+    """人名の新規登録"""
+    model = Person
+    form_class = PersonModelForm
+    template_name = 'schedule/person_detail/person_create.html'
+    success_url = reverse_lazy('person_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, '保存しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
+class PersonEditView(UpdateView):
+    """人名の編集"""
+    model = Person
+    form_class = PersonModelForm
+    template_name = 'schedule/person_detail/person_edit.html'
+    success_url = reverse_lazy('person_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, '保存しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
+class PersonDeleteView(DeleteView):
+    """人名の削除"""
+    model = Person
+    form_class = PersonModelForm
+    template_name = 'schedule/person_detail/person_delete.html'
+    success_url = reverse_lazy('person_list')
 
     def delete(self, request, *args, **kwargs):
         result = super().delete(request, *args, **kwargs)
