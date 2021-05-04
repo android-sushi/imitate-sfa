@@ -1,7 +1,7 @@
 from django import forms
 from .models import (
-    Company, Person, Info, Note, Schedule,
-    Product, StockControl, Weather
+    Company, Person, Info, Note,
+    Schedule,Product, StockControl,
 )
 from django.utils import timezone
 from django.utils.timezone import localtime
@@ -56,7 +56,8 @@ class ProductModelForm(forms.ModelForm):
     """在庫のフォーム"""
     class Meta:
         model = Product
-        fields = ('name', 'stock')
+        fields = ('name', 'date')
+        widgets = {'date': DateInput()}
 
 
 class StockControlModelForm(forms.ModelForm):
@@ -70,10 +71,6 @@ class StockControlModelForm(forms.ModelForm):
         label='商品名',
         queryset=Product.objects.all(),
         empty_label=None,
-    )
-    date = forms.DateField(
-        label='日付',
-        initial=localtime(timezone.now())
     )
 
     class Meta:
@@ -95,6 +92,8 @@ class PersonModelForm(forms.ModelForm):
         fields = ('name', 'company')
 
 
-
-
-
+class CompanyModelForm(forms.ModelForm):
+    """会社名のフォーム"""
+    class Meta:
+        model = Company
+        fields = ('name',)

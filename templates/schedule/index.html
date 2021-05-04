@@ -25,8 +25,6 @@
                     <div class="mt-n2">
                         <a class="btn btn-outline-dark btn-sm" href="{% url 'schedule_list' %}" role="button"><i
                                 class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                        <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
-                                class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
                     </div>
                 </div>
             </div>
@@ -35,27 +33,6 @@
     <div class="container-fluid" style="background-color:#f1f5f9;">
         <div class="container py-2">
             <div class="row">
-                <div class="col-sm mb-2">
-                    <h5><i class="far fa-sun fa-fw"></i>天気（仙台市{{ forecasts_info.area }}）</h5>
-                    <p>{{ forecasts_info.publishing_office }} {{ forecasts_info.report_datetime|date:"H時" }}発表</p>
-                    <table class="table table-sm border rounded bg-white text-center">
-                        <tr>
-                            <th>日</th>
-                            <th>天候</th>
-                        </tr>
-                        {% for forecast in forecasts_info.forecasts %}
-                            <tr>
-                                <td>{{ forecast.date|date:"n月j日" }}</td>
-                                <td>{{ forecast.weather }}</td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                    <div class="mt-n2">
-                        <a class="btn btn-outline-dark btn-sm"
-                           href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=040000"
-                           role="button"><i class="fas fa-link fa-fw"></i>気象庁</a>
-                    </div>
-                </div>
                 <div class="col-sm mb-3">
                     <h5><i class="fas fa-info-circle fa-fw"></i>お知らせ</h5>
                     <ul class="list-group">
@@ -89,9 +66,30 @@
                                 class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
                     </div>
                 </div>
+                <div class="col-sm mb-3">
+                    <h5><i class="far fa-sun fa-fw"></i>天気（仙台市{{ forecasts_info.area }}）</h5>
+                    <p>{{ forecasts_info.publishing_office }} {{ forecasts_info.report_datetime|date:"H時" }}発表</p>
+                    <table class="table table-sm border rounded bg-white text-center mt-n2">
+                        <tr>
+                            <th>日</th>
+                            <th>天候</th>
+                        </tr>
+                        {% for forecast in forecasts_info.forecasts %}
+                            <tr>
+                                <td>{{ forecast.date|date:"n月j日" }}</td>
+                                <td>{{ forecast.weather }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="mt-n2">
+                        <a class="btn btn-outline-dark btn-sm"
+                           href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=040000"
+                           role="button"><i class="fas fa-link fa-fw"></i>気象庁</a>
+                    </div>
+                </div>
             </div>
             <div class="row">
-                <div class="col-sm col-md-8 mb-2">
+                <div class="col-sm col-md-8 mb-3">
                     <h5><i class="fas fa-box-open"></i>在庫持ち出し</h5>
                     <table class="table table-sm border rounded bg-white text-center">
                         <tr>
@@ -112,8 +110,6 @@
                     <div class="mt-n2">
                         <a class="btn btn-outline-dark btn-sm" href="{% url 'sc_list' %}" role="button"><i
                                 class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                        <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
-                                class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
                     </div>
                 </div>
                 <div class="col-sm col-md-4 mb-3">
@@ -121,20 +117,18 @@
                     <table class="table table-sm border rounded bg-white text-center">
                         <tr>
                             <th>商品名</th>
-                            <th>在庫数</th>
+                            <th>購入日</th>
                         </tr>
                         {% for product in products %}
                             <tr>
                                 <td>{{ product.name }}</td>
-                                <td>{{ product.stock }}</td>
+                                <td>{{ product.date }}</td>
                             </tr>
                         {% endfor %}
                     </table>
                     <div class="mt-n2">
                         <a class="btn btn-outline-dark btn-sm" href="{% url 'product_list' %}" role="button"><i
                                 class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                        <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
-                                class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
                     </div>
                 </div>
             </div>

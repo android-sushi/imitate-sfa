@@ -10,13 +10,13 @@
             <table class="table table-sm border rounded bg-white text-center">
                 <tr>
                     <th>商品名</th>
-                    <th>在庫数</th>
+                    <th>購入日</th>
                     <th></th>
                 </tr>
                 {% for object in object_list %}
                     <tr>
                         <td class="align-middle">{{ object.name }}</td>
-                        <td class="align-middle">{{ object.stock }}</td>
+                        <td class="align-middle">{{ object.date }}</td>
                         <td class="align-middle"><a href="{% url 'product_edit' object.pk %}"
                                                     class="btn btn-outline-primary btn-sm"><i
                                 class="far fa-edit fa-fw"></i>編集</a></td>
@@ -26,6 +26,8 @@
             <div class="mt-n2">
                 <a class="btn btn-outline-dark btn-sm" href="{% url 'product_create' %}" role="button"><i
                         class="far fa-plus-square fa-fw"></i>新規登録</a>
+                <a href="{% url 'index' %}" class="btn btn-outline-dark btn-sm"><i
+                        class="fas fa-long-arrow-alt-left fa-fw"></i>戻る</a>
             </div>
         </div>
     </div>

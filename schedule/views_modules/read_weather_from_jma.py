@@ -17,7 +17,7 @@ def parse_three_date(dates, weathers):
     return weather_context
 
 
-def main():
+def read_weather():
     url = "https://www.jma.go.jp/bosai/forecast/data/forecast/040000.json"
     header = {"content-type": "application/json"}
 
@@ -42,4 +42,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    read_weather()

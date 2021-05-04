@@ -1,9 +1,7 @@
-from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 from schedule import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     # トップページ
     path('', views.IndexView.as_view(), name='index'),
     # 予定一覧
@@ -36,5 +34,9 @@ urlpatterns = [
     path('person/create', views.PersonCreateView.as_view(), name='person_create'),
     path('person/edit/<int:pk>', views.PersonEditView.as_view(), name='person_edit'),
     path('person/delete/<int:pk>', views.PersonDeleteView.as_view(), name='person_delete'),
-
+    # 会社一覧
+    path('company', views.CompanyListView.as_view(), name='company_list'),
+    path('company/create', views.CompanyCreateView.as_view(), name='company_create'),
+    path('company/edit/<int:pk>', views.CompanyEditView.as_view(), name='company_edit'),
+    path('company/delete/<int:pk>', views.CompanyDeleteView.as_view(), name='company_delete'),
 ]

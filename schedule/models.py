@@ -86,7 +86,7 @@ class Product(models.Model):
     """在庫モデル"""
     class Meta:
         db_table = 'product'
-
+    date = models.DateField(verbose_name='購入日', default=timezone.now, null=True)
     name = models.CharField(verbose_name='商品名', max_length=255, unique=True)
     stock = models.IntegerField(verbose_name='個数', default=0)
 
@@ -103,21 +103,8 @@ class StockControl(models.Model):
     company = models.ForeignKey(Company, verbose_name='会社名',
                                 on_delete=models.CASCADE)
     product = models.ForeignKey(Product, verbose_name='商品名',
-                                on_delete=models.PROTECT)
+                                on_delete=models.CASCADE)
     count = models.IntegerField(verbose_name='増減')
-
-    def __str__(self):
-        return str(self.date)
-
-
-class Weather(models.Model):
-    """天気モデル"""
-    class Meta:
-        db_table = 'weather'
-
-    date = models.DateField(verbose_name='日付', default=timezone.now)
-    weather = models.CharField(verbose_name='天気', max_length=255)
-    percent = models.IntegerField(verbose_name='降水確率')
 
     def __str__(self):
         return str(self.date)
