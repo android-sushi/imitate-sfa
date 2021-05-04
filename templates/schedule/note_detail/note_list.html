@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 {% block title %}みんなのメモ一覧 - 自作SFA{% endblock %}
 {% block content %}
-<div class="container-fluid" style="background-color:#e6f2ff;">
-    <div class="container py-2">
-    {% for message in messages %}
-        <div class="alert alert-success">{{ message }}</div>
-    {% endfor %}
-    <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモ一覧</h5>
-    <ul class="list-group">
-        {% for object in object_list %}
-        <li class="list-group-item">
-                {{ object.content | linebreaksbr}}
-                <div class="small">{{ object.name }}</div>
-                <a href="{% url 'note_edit' object.pk %}" class="btn btn-outline-primary btn-sm"><i class="far fa-edit fa-fw"></i>編集</a>
-        </li>
-        {% endfor %}
-    </ul>
-    <div class="mt-2">
-        <a class="btn btn-outline-dark btn-sm" href="{% url 'note_create' %}" role="button"><i class="far fa-plus-square fa-fw"></i>新規登録</a>
+    <div class="container-fluid" style="background-color:#e6f2ff;">
+        <div class="container py-2">
+            {% for message in messages %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+            <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモ一覧</h5>
+            <ul class="list-group">
+                {% for object in object_list %}
+                    <li class="list-group-item">
+                        {{ object.content | linebreaksbr }}
+                        <div class="small">{{ object.name }}</div>
+                        <a href="{% url 'note_edit' object.pk %}" class="btn btn-outline-primary btn-sm"><i
+                                class="far fa-edit fa-fw"></i>編集</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="mt-2">
+                <a class="btn btn-outline-dark btn-sm" href="{% url 'note_create' %}" role="button"><i
+                        class="far fa-plus-square fa-fw"></i>新規登録</a>
+            </div>
+        </div>
     </div>
-    </div>
-</div>
 {% endblock %}

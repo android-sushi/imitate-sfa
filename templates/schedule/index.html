@@ -1,135 +1,141 @@
 {% extends "base.html" %}
 {% block title %}トップページ - 自作SFA{% endblock %}
 {% block content %}
-<div class="container-fluid" style="background-color:#e6f2ff;">
-    <div class="container py-2">
-        <div class="row">
-            <div class="col-sm">
-                <h5><i class="far fa-calendar-alt fa-fw"></i>{{ date|date:"n月j日" }}のタスク</h5>
-                <table class="table table-sm border rounded bg-white text-center">
-                    <tr>
-                        <th>会社名</th>
-                        <th>場所</th>
-                        <th>内容</th>
-                        <th>人数</th>
-                    </tr>
-                    {% for schedule in schedules %}
-                    <tr>
-                        <td>{{ schedule.company }}</td>
-                        <td>{{ schedule.area }}</td>
-                        <td>{{ schedule.content }}</td>
-                        <td>{{ schedule.num_of_people }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                <div class="mt-n2">
-                    <a class="btn btn-outline-dark btn-sm" href="{% url 'schedule_list'%}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                    <a class="btn btn-outline-success btn-sm" href="#" role="button"><i class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
+    <div class="container-fluid" style="background-color:#e6f2ff;">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-sm">
+                    <h5><i class="far fa-calendar-alt fa-fw"></i>{{ date|date:"n月j日" }}のタスク</h5>
+                    <table class="table table-sm border rounded bg-white text-center">
+                        <tr>
+                            <th>会社名</th>
+                            <th>場所</th>
+                            <th>内容</th>
+                            <th>人数</th>
+                        </tr>
+                        {% for schedule in schedules %}
+                            <tr>
+                                <td>{{ schedule.company }}</td>
+                                <td>{{ schedule.area }}</td>
+                                <td>{{ schedule.content }}</td>
+                                <td>{{ schedule.num_of_people }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="mt-n2">
+                        <a class="btn btn-outline-dark btn-sm" href="{% url 'schedule_list' %}" role="button"><i
+                                class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                        <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
+                                class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="container-fluid" style="background-color:#f1f5f9;">
-    <div class="container py-2">
-        <div class="row">
-            <div class="col-sm mb-2">
-                <h5><i class="far fa-sun fa-fw"></i>天気</h5>
-                <table class="table table-sm border rounded bg-white text-center">
-                    <tr>
-                        <th>日</th>
-                        <th>天候</th>
-                        <th>降水確率</th>
-                    </tr>
-                    {% for weather in weathers%}
-                    <tr>
-                        <td>{{ weather.date|date:"n月j日" }}</td>
-                        <td>{{ weather.weather }}</td>
-                        <td>{{ weather.percent }}%</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                <div class="mt-n2">
-                    <a class="btn btn-outline-dark btn-sm" href="#" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧（未実装）</a>
+    <div class="container-fluid" style="background-color:#f1f5f9;">
+        <div class="container py-2">
+            <div class="row">
+                <div class="col-sm mb-2">
+                    <h5><i class="far fa-sun fa-fw"></i>天気（仙台市{{ forecasts_info.area }}）</h5>
+                    <p>{{ forecasts_info.publishing_office }} {{ forecasts_info.report_datetime|date:"h時" }}発表</p>
+                    <table class="table table-sm border rounded bg-white text-center">
+                        <tr>
+                            <th>日</th>
+                            <th>天候</th>
+                        </tr>
+                        {% for forecast in forecasts_info.forecasts %}
+                            <tr>
+                                <td>{{ forecast.date|date:"n月j日" }}</td>
+                                <td>{{ forecast.weather }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="mt-n2">
+                        <a class="btn btn-outline-dark btn-sm"
+                           href="https://www.jma.go.jp/bosai/forecast/#area_type=offices&area_code=040000"
+                           role="button"><i class="fas fa-link fa-fw"></i>気象庁</a>
+                    </div>
+                </div>
+                <div class="col-sm mb-3">
+                    <h5><i class="fas fa-info-circle fa-fw"></i>お知らせ</h5>
+                    <ul class="list-group">
+                        {% for info in infos %}
+                            <li class="list-group-item">
+                                <div class="m-n2">{{ info.content | truncatechars:25 }}
+                                    <div class="small">{{ info.date|date:"n月j日" }}・{{ info.name }}</div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="mt-2">
+                        <a class="btn btn-outline-dark btn-sm" href="{% url 'info_list' %}" role="button"><i
+                                class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                    </div>
+                </div>
+                <div class="col-sm mb-3">
+                    <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモ</h5>
+                    <ul class="list-group">
+                        {% for note in notes %}
+                            <li class="list-group-item">
+                                <div class="m-n2">
+                                    {{ note.content | truncatechars:25 }}
+                                    <div class="small">{{ note.name }}</div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="mt-2">
+                        <a class="btn btn-outline-dark btn-sm" href="{% url 'note_list' %}" role="button"><i
+                                class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                    </div>
                 </div>
             </div>
-            <div class="col-sm mb-3">
-                <h5><i class="fas fa-info-circle fa-fw"></i>お知らせ</h5>
-                <ul class="list-group">
-                    {% for info in infos %}
-                    <li class="list-group-item">
-                        <div class="m-n2">{{ info.content | truncatechars:25 }}
-                            <div class="small">{{ info.date|date:"n月j日" }}・{{ info.name }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="mt-2">
-                    <a class="btn btn-outline-dark btn-sm" href="{% url 'info_list' %}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+            <div class="row">
+                <div class="col-sm col-md-8 mb-2">
+                    <h5><i class="fas fa-box-open"></i>在庫持ち出し</h5>
+                    <table class="table table-sm border rounded bg-white text-center">
+                        <tr>
+                            <th>日付</th>
+                            <th>会社名</th>
+                            <th>商品名</th>
+                            <th>増減</th>
+                        </tr>
+                        {% for stockcontrol in stockcontrols %}
+                            <tr>
+                                <td>{{ stockcontrol.date|date:"n月j日" }}</td>
+                                <td>{{ stockcontrol.company }}</td>
+                                <td>{{ stockcontrol.product }}</td>
+                                <td>{{ stockcontrol.count }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="mt-n2">
+                        <a class="btn btn-outline-dark btn-sm" href="{% url 'sc_list' %}" role="button"><i
+                                class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                        <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
+                                class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm mb-3">
-                <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモ</h5>
-                <ul class="list-group">
-                    {% for note in notes %}
-                    <li class="list-group-item">
-                        <div class="m-n2">
-                            {{ note.content | truncatechars:25 }}
-                            <div class="small">{{ note.name }}</div>
-                        </div>
-                    </li>
-                    {% endfor %}
-                </ul>
-                <div class="mt-2">
-                    <a class="btn btn-outline-dark btn-sm" href="{% url 'note_list' %}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm col-md-8 mb-2">
-                <h5><i class="fas fa-box-open"></i>在庫持ち出し</h5>
-                <table class="table table-sm border rounded bg-white text-center">
-                    <tr>
-                        <th>日付</th>
-                        <th>会社名</th>
-                        <th>商品名</th>
-                        <th>増減</th>
-                    </tr>
-                    {% for stockcontrol in stockcontrols %}
-                    <tr>
-                        <td>{{ stockcontrol.date|date:"n月j日" }}</td>
-                        <td>{{ stockcontrol.company }}</td>
-                        <td>{{ stockcontrol.product }}</td>
-                        <td>{{ stockcontrol.count }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                <div class="mt-n2">
-                    <a class="btn btn-outline-dark btn-sm" href="{% url 'sc_list' %}" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
-                    <a class="btn btn-outline-success btn-sm" href="#" role="button"><i class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
-                </div>
-            </div>
-            <div class="col-sm col-md-4 mb-3">
-                <h5><i class="fas fa-boxes fa-fw"></i>在庫状況</h5>
-                <table class="table table-sm border rounded bg-white text-center">
-                    <tr>
-                        <th>商品名</th>
-                        <th>在庫数</th>
-                    </tr>
-                    {% for product in products %}
-                    <tr>
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.stock }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                <a class="btn btn-outline-dark btn-sm" href="#" role="button"><i class="far fa-arrow-alt-circle-right fa-fw"></i>一覧（未実装）</a>
-                <a class="btn btn-outline-success btn-sm" href="#" role="button"><i class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
-
-
+                <div class="col-sm col-md-4 mb-3">
+                    <h5><i class="fas fa-boxes fa-fw"></i>在庫状況</h5>
+                    <table class="table table-sm border rounded bg-white text-center">
+                        <tr>
+                            <th>商品名</th>
+                            <th>在庫数</th>
+                        </tr>
+                        {% for product in products %}
+                            <tr>
+                                <td>{{ product.name }}</td>
+                                <td>{{ product.stock }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <a class="btn btn-outline-dark btn-sm" href="{% url 'product_list' %}" role="button"><i
+                            class="far fa-arrow-alt-circle-right fa-fw"></i>一覧</a>
+                    <a class="btn btn-outline-success btn-sm" href="#" role="button"><i
+                            class="far fa-file-excel fa-fw"></i>Excel（未実装）</a>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

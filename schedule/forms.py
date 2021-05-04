@@ -16,7 +16,8 @@ class ScheduleModelForm(forms.ModelForm):
     company = forms.ModelChoiceField(
         label='会社名',
         queryset=Company.objects.all(),
-        empty_label=None, )
+        empty_label=None,
+    )
 
     class Meta:
         model = Schedule
@@ -49,6 +50,19 @@ class NoteModelForm(forms.ModelForm):
     class Meta:
         model = Note
         fields = ('content', 'name')
+
+
+class ProductModelForm(forms.ModelForm):
+    """在庫のフォーム"""
+    name = forms.ModelChoiceField(
+        label='商品名',
+        queryset = Product.objects.all(),
+        empty_label=None,
+    )
+
+    class Meta:
+        model = Product
+        fields = ('name', 'stock')
 
 
 class StockControlModelForm(forms.ModelForm):

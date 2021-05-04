@@ -3,22 +3,25 @@
 {% block extrahead %}{{ form.media }}{% endblock %}
 {% block title %}みんなのメモの編集 - 自作SFA{% endblock %}
 {% block content %}
-<div class="container-fluid" style="background-color:#e6f2ff;">
-    <div class="container py-2">
-        <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモの編集</h5>
-        <form action="" method="post" novalidate>
-            {% csrf_token %}
-            <ul>
-                {% for error in field.errors %}
-                <li>{{ error }}</li>
-                {% endfor %}
-            </ul>
-            {% csrf_token %}
-            {% bootstrap_form form %}
-            <button class="btn btn-outline-primary" type="submit"><i class="fas fa-paper-plane fa-fw"></i>送信</button>
-            <a href="{% url 'note_delete' object.pk %}" class="btn btn-outline-danger"><i class="far fa-trash-alt fa-fw"></i>削除</a>
-            <a href="{% url 'note_list' %}" class="btn btn-outline-dark"><i class="fas fa-long-arrow-alt-left fa-fw"></i></i>戻る</a>
-        </form>
+    <div class="container-fluid" style="background-color:#e6f2ff;">
+        <div class="container py-2">
+            <h5><i class="far fa-comment-alt fa-fw"></i>みんなのメモの編集</h5>
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <button class="btn btn-outline-primary" type="submit"><i class="fas fa-paper-plane fa-fw"></i>送信
+                </button>
+                <a href="{% url 'note_delete' object.pk %}" class="btn btn-outline-danger"><i
+                        class="far fa-trash-alt fa-fw"></i>削除</a>
+                <a href="{% url 'note_list' %}" class="btn btn-outline-dark"><i
+                        class="fas fa-long-arrow-alt-left fa-fw"></i>戻る</a>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}

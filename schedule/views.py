@@ -13,8 +13,10 @@ from .models import (
 )
 from .forms import (
     ScheduleModelForm, InfoModelForm, NoteModelForm,
-    StockControlModelForm,
+    StockControlModelForm, ProductModelForm,
 )
+
+from .views_modules import read_weather_from_jma
 
 
 class IndexView(TemplateView):
@@ -26,7 +28,8 @@ class IndexView(TemplateView):
         date = localtime(timezone.now())
         context['date'] = date
         context['schedules'] = Schedule.objects.filter(date=date).order_by('company')
-        context['weathers'] = Weather.objects.filter(date__gte=date)[:3]
+        # context['weathers'] = Weather.objects.filter(date__gte=date)[:3]
+        context['forecasts_info'] = read_weather_from_jma.main()
         context['infos'] = Info.objects.order_by('-pk')[:5]
         context['notes'] = Note.objects.order_by('-pk')[:5]
         context['stockcontrols'] = StockControl.objects.order_by('-date')[:5]
@@ -41,8 +44,7 @@ class ScheduleListView(ListView):
     paginate_by = 10
     date = localtime(timezone.now())
 
-    def get_queryset(self, **kwargs):
-        queryset = super().get_queryset(**kwargs)
+    def get_queryset(self):
         queryset = self.model.objects.order_by('company').order_by('-date')
         return queryset
 
@@ -246,6 +248,59 @@ class StockControlDeleteView(DeleteView):
     form_class = StockControlModelForm
     template_name = 'schedule/sc_detail/sc_delete.html'
     success_url = reverse_lazy('sc_list')
+
+    def delete(self, request, *args, **kwargs):
+        result = super().delete(request, *args, **kwargs)
+        messages.success(self.request, '削除しました')
+        return result
+
+
+class ProductListView(ListView):
+    """商品の一覧"""
+    model = Product
+    template_name = 'schedule/product_detail/product_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        return self.model.objects.order_by('name')
+
+
+class ProductCreateView(CreateView):
+    """商品の新規登録"""
+    model = Product
+    form_class = ProductModelForm
+    template_name = 'schedule/product_detail/product_create.html'
+    success_url = reverse_lazy('product_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, '保存しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
+class ProductEditView(UpdateView):
+    """商品の編集"""
+    model = Product
+    form_class = ProductModelForm
+    template_name = 'schedule/product_detail/product_edit.html'
+    success_url = reverse_lazy('product_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, '保存しました')
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        return super().form_invalid(form)
+
+
+class ProductDeleteView(DeleteView):
+    """商品の削除"""
+    model = Product
+    form_class = ProductModelForm
+    template_name = 'schedule/product_detail/product_delete.html'
+    success_url = reverse_lazy('product_list')
 
     def delete(self, request, *args, **kwargs):
         result = super().delete(request, *args, **kwargs)

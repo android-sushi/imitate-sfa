@@ -1,13 +1,12 @@
 {% extends "base.html" %}  {% load bootstrap4 %}  {% bootstrap_css %}
 {% bootstrap_javascript jquery='full' %}
 {% block extrahead %}{{ form.media }}{% endblock %}
-{% block title %}在庫持ち出しの編集 - 自作SFA{% endblock %}
+{% block title %}在庫状況の新規登録 - 自作SFA{% endblock %}
 {% block content %}
     <div class="container-fluid" style="background-color:#e6f2ff;">
         <div class="container py-2">
-            <h5><i class="fas fa-info-circle fa-fw"></i>在庫持ち出しの編集</h5>
+            <h5><i class="fas fa-boxes fa-fw"></i>在庫状況の新規登録</h5>
             <form action="" method="post" novalidate>
-                {% csrf_token %}
                 <ul>
                     {% for error in field.errors %}
                         <li>{{ error }}</li>
@@ -17,9 +16,7 @@
                 {% bootstrap_form form %}
                 <button class="btn btn-outline-primary" type="submit"><i class="fas fa-paper-plane fa-fw"></i>送信
                 </button>
-                <a href="{% url 'sc_delete' object.pk %}" class="btn btn-outline-danger"><i
-                        class="far fa-trash-alt fa-fw"></i>削除</a>
-                <a href="{% url 'sc_list' %}" class="btn btn-outline-dark"><i
+                <a href="{% url 'product_list' %}" class="btn btn-outline-dark"><i
                         class="fas fa-long-arrow-alt-left fa-fw"></i>戻る</a>
             </form>
         </div>

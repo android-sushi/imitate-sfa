@@ -71,12 +71,12 @@ class Schedule(models.Model):
 
 
 class Product(models.Model):
-    """商品モデル"""
+    """在庫モデル"""
     class Meta:
         db_table = 'product'
 
     name = models.CharField(verbose_name='商品名', max_length=255)
-    stock = models.IntegerField(verbose_name='個数')
+    stock = models.IntegerField(verbose_name='個数', default=0)
 
     def __str__(self):
         return self.name
