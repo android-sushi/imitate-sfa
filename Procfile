@@ -1,1 +1,1 @@
-web: gunicorn django-sfa.wsgi
+web: gunicorn imitate_sfa.wsgi
