@@ -1,0 +1,1 @@
+web: gunicorn delivery_schedule_app.wsgi
