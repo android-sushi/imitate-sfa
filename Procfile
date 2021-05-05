@@ -1,1 +1,1 @@
-web: gunicorn imitate-sfa.wsgi
+web: gunicorn config.wsgi --log-file -
