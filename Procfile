@@ -1,1 +1,1 @@
-web: gunicorn imitate_sfa.wsgi
+web: gunicorn imitate-sfa.wsgi
