@@ -1,1 +1,1 @@
-web: gunicorn delivery_schedule_app.wsgi
+web: gunicorn django-sfa.wsgi
