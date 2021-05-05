@@ -1,10 +1,8 @@
 from django import forms
 from .models import (
     Company, Person, Info, Note,
-    Schedule,Product, StockControl,
+    Schedule, Product, StockControl,
 )
-from django.utils import timezone
-from django.utils.timezone import localtime
 
 
 class DateInput(forms.DateInput):
