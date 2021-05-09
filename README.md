@@ -2,7 +2,7 @@
 SFA（Sales Force Automation）と書いていますが、なんとなく雰囲気をまねたものです。
 
 ## OverView
-非IT系なチームがExcelで管理してそうな、日々蓄積される情報をまとめたいと思い作ってみました。
+普段からExcelを使い情報をまとめている人に対し、Excelの代わりに使ってほしいと思い作ってみました。
 
 ## Demo
 https://imitate-sfa.herokuapp.com/
